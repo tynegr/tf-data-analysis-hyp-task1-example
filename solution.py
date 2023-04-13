@@ -4,14 +4,14 @@ import math
 from scipy import stats
 from statsmodels.stats.proportion import proportions_ztest
 
-chat_id = 298754188 # Ваш chat ID, не меняйте название переменной
+chat_id = 462449141 # Ваш chat ID, не меняйте название переменной
 
 def solution(x_success: int, 
              x_cnt: int, 
              y_success: int, 
              y_cnt: int) -> bool:
   
-    alpha=0.01
+    alpha=0.04
     
     p_value=proportions_ztest([x_success, y_success], [x_cnt, y_cnt])[1] / 2
     
