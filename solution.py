@@ -1,21 +1,37 @@
+
+ 
+
 import pandas as pd
 import numpy as np
-
+import math
+from scipy import stats
+from statsmodels.stats.proportion import proportions_ztest
 
 chat_id = 462449141 # Ваш chat ID, не меняйте название переменной
-
-from statsmodels.stats.proportion import proportions_ztest
 
 def solution(x_success: int, 
              x_cnt: int, 
              y_success: int, 
              y_cnt: int) -> bool:
+  
+    alpha=0.04
     
-    alpha = 0.04
+    p_value=proportions_ztest([x_success, y_success], [x_cnt, y_cnt])[1] / 2
     
-    counts = np.array([x_success, y_success])
-    nobs = np.array([x_cnt, y_cnt])
+    if (p_value < alpha) and (x_success/x_cnt < y_success/y_cnt):
+      return True
+    else: 
+      return False
     
-    _, p_value = proportions_ztest(counts, nobs, alternative = 'smaller')
-
-    return p_value < alpha # Ваш ответ, True или False
+# def solution(x_success: int, 
+#              x_cnt: int, 
+#              y_success: int, 
+#              y_cnt: int) -> bool:
+#     # Измените код этой функции
+#     # Это будет вашим решением
+#     # Не меняйте название функции и её аргументы
+#     _, pval = proportions_ztest([x_success, y_success], [x_cnt, y_cnt], alternative='larger')
+#     alpha = 0.01
+#     effect = (pval < alpha)
+    
+#     return effect # Ваш ответ, True или False
